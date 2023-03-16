@@ -1,0 +1,16 @@
+{
+  "name": "chef_chat",
+  "version": "1.0.0",
+  "description": "Restaurant chatbot app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Chatbot",
+    "Restaurant",
+    "Websocket"
+  ],
+  "author": "Muhammad Ibrahim",
+  "license": "ISC"
+}
