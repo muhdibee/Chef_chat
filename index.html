@@ -7,17 +7,16 @@
         <title>Document</title>
     </head>
     <body>
+        chatbot
         
     </body>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
-        import {io} from 'socket.io-client';
-        import {log} from './log.js';
 
-
-        const socket = io(`ws//localhost:${3000}`);
+        const socket = io(`ws//localhost:8000`);
 
         socket.on("connected", (data)=>{
-            log("Console","Connected to server")
+            console.log("Connected to server");
         })
 
 
