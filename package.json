@@ -4,7 +4,8 @@
   "description": "Restaurant chatbot app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "Chatbot",
@@ -13,7 +14,18 @@
   ],
   "author": "Muhammad Ibrahim",
   "license": "ISC",
+<<<<<<< HEAD
   "dependencies": {
     "socket.io": "^4.6.1"
+=======
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+>>>>>>> 0e9d51973732e975005a4fd98c575b35ab8109fb
   }
 }
