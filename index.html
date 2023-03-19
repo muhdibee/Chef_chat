@@ -5,26 +5,104 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <style>
+            /* *{
+                border: 1px ridge;
+            } */
+            body{
+                background-color: rgb(200, 207, 212);
+                /* display: flex;
+                /* justify-content: ; */
+                /* flex-direction: row; */ 
+            }
+            #navBar{
+                width: 90%;
+                height: 7%;
+                padding: 0.3% 5%;
+                margin-bottom: 2%;
+                border-bottom: 1px ridge;
+                box-shadow: black;
+                
+                
+            }
+            #chatBox{
+                position: relative;
+                height: 70vh;
+                width: 50vw;
+                border: 1px ridge;
+                margin: 1px auto;
+                background-color: aliceblue;
+            }
+            #formInput{
+                display: flex;
+                flex-direction: row;
+                padding: 2% 5%;
+                width: 90%;
+                position: absolute;
+                bottom: 0;
+                background-color: rgb(200, 207, 212);
+            }
+            #inputField{
+                flex-grow: 2;
+                width: 73%;
+                height: 2rem;
+                font-size: large;
+            }
+            #sendButton{
+                /* width: 25%; */
+                height: 2.4rem;
+                font-size: large;
+                /* padding: 10px; */
+            }
+            
+            
+            /* Styles for screens that are 900px or less*/
+            @media screen and (max-width: 900px) {
+                body{
+                    background-color: rgb(74, 106, 129);
+                }
+                #chatBox{
+                    height: 80vh;
+                    width: 95vw;
+                }
+                /* #inputField{
+                width: 65%;
+                height: auto;
+            }
+            #sendButton{
+                width: 20%;
+                height: auto;
+            } */
+
+            }
+        </style>
     </head>
     <body>
-        <div id="chatBox"></div>
-        <form>
-          <input id="inputField" type="text">
-          <button id="sendButton" type="button">Send</button>
-        </form>    </body>
+        <nav id="navBar">
+            <span><h2>CHEFCHAT</h2></span>
+        </nav>
+        <div id="chatBox">
+            <form id="chatbotForm">
+                <div id="formInput">
+                    <input id="inputField" type="text" placeholder="Message...">
+                    <button id="sendButton" type="button">Send</button>
+                </div>
+            </form>
+        </div>
+    </body>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
 
-        // const socket = io();
+        const socket = io();
 
-        // socket.on("connected", async (data)=>{
-        //     const {id} = data
-        //     console.log("Connected to server.");
-        //     console.log({id})
-        // })
+        socket.on("connected", async (data)=>{
+            const {id} = data
+            console.log("Connected to server.");
+            console.log({id})
+        })
 
     </script>
-    <script>
+    <!-- <script>
         // Establish a socket connection to the server
       const socket = io();
       
@@ -82,6 +160,6 @@
         }
       });
       
-      </script>
+      </script> -->
 
 </html>
