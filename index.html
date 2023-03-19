@@ -6,14 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <style>
-            /* *{
-                border: 1px ridge;
-            } */
             body{
                 background-color: rgb(200, 207, 212);
-                /* display: flex;
-                /* justify-content: ; */
-                /* flex-direction: row; */ 
             }
             #navBar{
                 width: 90%;
@@ -48,11 +42,9 @@
                 height: 2rem;
                 font-size: large;
             }
-            #sendButton{
-                /* width: 25%; */
+            #submitButton{
                 height: 2.4rem;
                 font-size: large;
-                /* padding: 10px; */
             }
             
             
@@ -65,15 +57,6 @@
                     height: 80vh;
                     width: 95vw;
                 }
-                /* #inputField{
-                width: 65%;
-                height: auto;
-            }
-            #sendButton{
-                width: 20%;
-                height: auto;
-            } */
-
             }
         </style>
     </head>
@@ -81,27 +64,17 @@
         <nav id="navBar">
             <span><h2>CHEFCHAT</h2></span>
         </nav>
-        <div id="chatBox">
+        <div id="chatBox"><p>chatbox</p>
             <form id="chatbotForm">
                 <div id="formInput">
-                    <input id="inputField" type="text" placeholder="Message...">
-                    <button id="sendButton" type="button">Send</button>
+                    <input id="inputField" name="inputField" type="text" placeholder="Message...">
+                    <input id="submitButton" type="submit" value="submit">
                 </div>
             </form>
         </div>
     </body>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script>
 
-        const socket = io();
-
-        socket.on("connected", async (data)=>{
-            const {id} = data
-            console.log("Connected to server.");
-            console.log({id})
-        })
-
-    </script>
     <!-- <script>
         // Establish a socket connection to the server
       const socket = io();
