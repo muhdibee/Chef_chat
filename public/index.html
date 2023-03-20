@@ -25,8 +25,8 @@
                 width: 50vw;
                 border: 1px ridge;
                 margin: 1px auto;
-                background-color: aliceblue;
-            }
+                border-radius: 5px;
+                background-color: rgb(200, 207, 212);            }
             #formInput{
                 display: flex;
                 flex-direction: row;
@@ -36,11 +36,20 @@
                 bottom: 0;
                 background-color: rgb(200, 207, 212);
             }
+            #chatSpace{
+                padding: 1%;
+                margin-top: 5%;
+                min-height: 88%;
+                background-color: aliceblue;
+
+            }
             #inputField{
                 flex-grow: 2;
                 width: 73%;
                 height: 2rem;
                 font-size: large;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
             }
             #submitButton{
                 height: 2.4rem;
@@ -64,7 +73,7 @@
         <nav id="navBar">
             <span><h2>CHEFCHAT</h2></span>
         </nav>
-        <div id="chatBox"><p>chatbox</p>
+        <div id="chatBox"><div id="chatSpace">chat space</div>
             <form id="chatbotForm">
                 <div id="formInput">
                     <input id="inputField" name="inputField" type="text" placeholder="Message...">

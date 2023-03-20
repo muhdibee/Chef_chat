@@ -1,21 +1,19 @@
-
-
-
 const socket = io();
 
-socket.on("connected", async (data)=>{
-    const {id} = data
+// Collecting DOM elements.
+let userMessage = document.getElementById("inputField");
+const chatSpace = document.getElementById("chatSpace");
+const div = document.createElement("div")
+
+// On initial connection to server
+socket.on("connected", async (initailBotMessage)=>{
     console.log("Connected to server.");
-    console.log({id});
-
-    // Handling DOM elements.
-    chatbotForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        let userMessage = document.getElementById("inputField");
-        // let userMessage = document.getElementById("inputField");
-
-        
-        
-    } )
+    console.log(initailBotMessage);
+    console.log("handling event.")
+    chatSpace.append(initailBotMessage, div);
+    chatSpace.append(initailBotMessage, div);
+    chatSpace.append(initailBotMessage, div);
 })
+
+socket.emit("userMessage", userMessage.value);
 

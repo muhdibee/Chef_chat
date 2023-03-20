@@ -12,15 +12,23 @@ const io = new Server(server);
 
 app.use(express.static("public"));
 
-app.get('/', (req,res) => {
-    res.setHeader("content-type", "text/javascript")
-    res.sendFile(path.join(__dirname, "index.html"))
+// Commented the below code because express.static("public") is serving the index.html file.
+// app.get('/', (req,res) => {
+//     res.sendFile("public/index-script.js")
 
-});
+// });
 
 io.on("connection", async (socket)=>{
-    console.log(`client ${socket.id} connected`);
-    socket.emit("connected", {id:socket.id });
+    console.log(`client connected`);
+    const initailBotMessage = `
+    Hello There, \n
+    Select 1 to Place an order\n
+    Select 99 to checkout order\n
+    Select 98 to see order history\n
+    Select 97 to see current order\n
+    Select 0 to cancel order
+    `
+    socket.emit("connected", initailBotMessage);
 
 
     socket.on("disconnect", async ()=>{
