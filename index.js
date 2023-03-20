@@ -10,8 +10,10 @@ const port = 8000;
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+app.use(express.static("public"));
+
 app.get('/', (req,res) => {
-    // res.send("Hello");
+    res.setHeader("content-type", "text/javascript")
     res.sendFile(path.join(__dirname, "index.html"))
 
 });
