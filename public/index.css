@@ -1,0 +1,80 @@
+body{
+    background-color: rgb(200, 207, 212);
+}
+#navBar{
+    width: 90%;
+    height: 7%;
+    padding: 0.3% 5%;
+    margin-bottom: 2%;
+    border-bottom: 1px ridge;
+    box-shadow: black;
+    
+    
+}
+#chatBox{
+    position: relative;
+    height: 70vh;
+    width: 50vw;
+    border: 1px ridge;
+    margin: 1px auto;
+    border-radius: 5px;
+    background-color: rgb(200, 207, 212);            
+}
+#formInput{
+    display: flex;
+    flex-direction: row;
+    padding: 2% 5%;
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(200, 207, 212);
+}
+#chatSpace{
+    position: relative;
+    padding: 1%;
+    margin-top: 5%;
+    min-height: 88%;
+    background-color: aliceblue;
+
+}
+.botParag{
+    position: absolute;
+    left:0;
+    width: 60%;
+    background-color: rgb(74, 106, 129);
+    border-radius: 7px;
+    border-bottom-left-radius: 0px;
+}
+.userParag{
+    position: absolute;
+    left:0;
+    width: 60%;
+    background-color: rgb(200, 207, 212);
+    border-radius: 7px;
+    border-bottom-left-radius: 0px;
+}
+
+#inputField{
+    flex-grow: 2;
+    width: 73%;
+    height: 2rem;
+    font-size: large;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#submitButton{
+    height: 2.4rem;
+    font-size: large;
+}
+
+
+/* Styles for screens that are 900px or less*/
+@media screen and (max-width: 900px) {
+    body{
+        background-color: rgb(74, 106, 129);
+    }
+    #chatBox{
+        height: 80vh;
+        width: 95vw;
+    }
+}
