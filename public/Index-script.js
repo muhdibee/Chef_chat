@@ -8,7 +8,7 @@ let inputField = document.getElementById("inputField")
 
 // Creating DOM element.
 // let botParag = document.createElement("p");
-let userParag = document.createElement("p");
+// let userParag = document.createElement("p");
 
 // Adding CSS
 let botDivgCSS = `
@@ -24,13 +24,18 @@ let botDivgCSS = `
     border-bottom-left-radius: 0px;
 `
 let userDivCSS = `
-    position: absolute; 
-    left:2%;
-    width: 60%;
-    padding: 2%;
-    background-color: rgb(74, 106, 129);
-    border-radius:20px;
-    border-bottom-left-radius: 0px;
+    // position: relative; 
+    float: right;
+    display:grid;
+    right:2%;
+    min-width: 40;
+    max-width: 60%;
+    padding: 1%;
+    margin: 15px;
+    color: black;
+    background-color: skyblue  ;
+    border-radius:10px;
+    border-bottom-right-radius: 0px;
 `
 
 // Global variables.
@@ -49,20 +54,21 @@ let invalidResponse = `
         botDiv.innerHTML = `<p>${message}</P>`
         botDiv.style.cssText = botDivgCSS
         chatSpace.append(botDiv);
+        chatSpace.scrollTop = chatSpace.scrollHeight;
   }
 
     // Append user message to chat.
     const appenduserMessage = (message) => {
         let chatSpace = document.getElementById("chatSpace");
-        let botDiv = document.createElement("div");
-        botDiv.innerHTML = `<p>${message}</P>`
-        botDiv.style.cssText = botDivgCSS
-        chatSpace.append(botDiv);
+        let userDiv = document.createElement("div");
+        userDiv.innerHTML = `<p>${message}</P>`
+        userDiv.style.cssText = userDivCSS
+        chatSpace.append(userDiv);
   }
 
 
 
-userParag.style.cssText = userParagCSS;
+// userParag.style.cssText = userParagCSS;
 
 
 // On initial connection to server.
@@ -78,13 +84,12 @@ socket.on("connected", async (initailBotMessage)=>{
 // Handling form submission.
 chatbotForm.addEventListener("submit", (e)=>{
     e.preventDefault();
-    const userMessage = inputField.value;
+    let userMessage = inputField.value;
     console.log(userMessage)
     if (userMessage != 0 || 1 || 97 || 98 || 99){
-        userMessage = "";
         appenduserMessage(userMessage);
         appendbotMessage(invalidResponse);
-        return
+        return inputField.value = "";
     }
     socket.emit("userMessage", userMessage);
 })
