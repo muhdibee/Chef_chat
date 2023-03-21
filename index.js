@@ -30,7 +30,6 @@ const options = `
     Select <b>99</b> to checkout order.</br>
     Select <b>0</b> to cancel order.
 `
-// const emptyOrder = "You do not have any oder to cancle."
 
 const menu = {
     1: "Pizza",
@@ -45,6 +44,17 @@ const order = [];
 io.on("connection", async (socket)=>{
     console.log(`client connected.`);
     
+    // Handle bot reply for empty order.
+    function emptyOrderRespnse(type){
+        socket.emit("empty order", `You do not have ${type==97 && "any order yet..." 
+        || type==98 && "order history..." 
+        || type==99&& "any order to checkout..." 
+        || type==0 && "any order to cancle..."}`
+        );
+        socket.emit("empty order", options);
+        return
+    } 
+    
     socket.emit("connected", BotHelloMessage);
     socket.emit("connected", options);
 
@@ -52,21 +62,38 @@ io.on("connection", async (socket)=>{
         console.log("client disconnected.")
     });
 
-    // Bot reply for cancel order.
-    socket.on("0", async() =>{
-        if(order.length == 0){
-            socket.emit("empty order", "You do not have any oder to cancle.");
-            socket.emit("empty order", options);
+    // Bot reply for placing order.
+    // socket.on("1", async() =>{
+    //     if(order.length == 0){
+    //         emptyOrderRespnse(1)
+    //     }
+    // });
 
+    // Bot reply for current order.
+    socket.on("97", async() =>{
+        if(order.length == 0){
+            emptyOrderRespnse(97)
+        }
+    });
+
+    // Bot reply for order history.
+    socket.on("98", async() =>{
+        if(order.length == 0){
+            emptyOrderRespnse(98)
+        }
+    });
+    
+    // Bot reply for checkout order.
+    socket.on("99", async() =>{
+        if(order.length == 0){
+            emptyOrderRespnse(99)
         }
     });
 
     // Bot reply for checkout order.
-    socket.on("99", async() =>{
+    socket.on("0", async() =>{
         if(order.length == 0){
-            socket.emit("empty order", "You have not placed any order yet.");
-            socket.emit("empty order", options);
-
+            emptyOrderRespnse(0)
         }
     });
 
