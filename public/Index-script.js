@@ -81,16 +81,41 @@ socket.on("connected", async (initailBotMessage)=>{
 })
 
 
-// Handling form submission.
+// Handling form submission on user first reply.
 chatbotForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     let userMessage = inputField.value;
+    if(userMessage.length < 1){
+        return
+    }
     console.log(userMessage)
-    if (userMessage != 0 || 1 || 97 || 98 || 99){
+
+    function returnAndEmmitUserMess(userMessage){
+        appenduserMessage(userMessage);
+        return inputField.value = "";
+    }
+    if (userMessage == 0){
+        returnAndEmmitUserMess(userMessage);
+    }
+    else if (userMessage == 1){
+        returnAndEmmitUserMess(userMessage);
+    } 
+    else if (userMessage == 97){
+        returnAndEmmitUserMess(userMessage);
+    }    
+    else if (userMessage == 98){
+        returnAndEmmitUserMess(userMessage);
+    }    
+    else if (userMessage == 99){
+        returnAndEmmitUserMess(userMessage);
+    }
+    else{
         appenduserMessage(userMessage);
         appendbotMessage(invalidResponse);
         return inputField.value = "";
+        
     }
+
     socket.emit("userMessage", userMessage);
 })
 

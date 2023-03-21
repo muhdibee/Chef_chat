@@ -22,8 +22,8 @@ body {
     background-color: rgb(200, 207, 212);            
 }
 #formInput{
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     padding: 2% 5%;
     width: 90%;
     position: absolute;
@@ -32,6 +32,8 @@ body {
 }
 #chatSpace{
     /* position: relative; */
+    display:grid;
+    grid-template-columns: 1fr;
     padding: 1%;
     padding-bottom: 5;
     margin-top: 5%;
