@@ -14,7 +14,7 @@ let inputField = document.getElementById("inputField")
 let botDivgCSS = `
     position: relative; 
     left:2%;
-    min-width: 40;
+    min-width: 40%;
     max-width: 60%;
     padding: 1%;
     margin: 15px;
@@ -28,7 +28,7 @@ let userDivCSS = `
     float: right;
     display:grid;
     right:2%;
-    min-width: 40;
+    min-width: 40%;
     max-width: 60%;
     padding: 1%;
     margin: 15px;
@@ -40,13 +40,15 @@ let userDivCSS = `
 
 // Global variables.
 let invalidResponse = `
-    <b>Ops, Invalid response</b> </br> </br>
-    Select <b>1</b> to Place an order</br>
-    Select <b>99</b> to checkout order</br>
-    Select <b>98</b> to see order history</br>
-    Select <b>97</b> to see current order</br>
-    Select <b>0</b> to cancel order
+    <b>Ops, Invalid response.</b>
     `
+    let options = `
+    Select <b>1</b> to Place an order.</br>
+    Select <b>99</b> to checkout order.</br>
+    Select <b>98</b> to see order history.</br>
+    Select <b>97</b> to see current order.</br>
+    Select <b>0</b> to cancel order.
+`
     // Append bot message to chat.
     const appendbotMessage = (message) => {
         let chatSpace = document.getElementById("chatSpace");
@@ -64,6 +66,7 @@ let invalidResponse = `
         userDiv.innerHTML = `<p>${message}</P>`
         userDiv.style.cssText = userDivCSS
         chatSpace.append(userDiv);
+        chatSpace.scrollTop = chatSpace.scrollHeight;
   }
 
 
@@ -90,33 +93,42 @@ chatbotForm.addEventListener("submit", (e)=>{
     }
     console.log(userMessage)
 
-    function returnAndEmmitUserMess(userMessage){
+    function returnUserMess(userMessage){
         appenduserMessage(userMessage);
         return inputField.value = "";
     }
     if (userMessage == 0){
-        returnAndEmmitUserMess(userMessage);
+        returnUserMess(userMessage);
+        socket.emit("0", 0)
     }
     else if (userMessage == 1){
-        returnAndEmmitUserMess(userMessage);
+        returnUserMess(userMessage);
+        socket.emit("1", 1)
     } 
     else if (userMessage == 97){
-        returnAndEmmitUserMess(userMessage);
+        returnUserMess(userMessage);
+        socket.emit("97", 97);
     }    
     else if (userMessage == 98){
-        returnAndEmmitUserMess(userMessage);
+        returnUserMess(userMessage);
+        socket.emit("98", 98);
     }    
     else if (userMessage == 99){
-        returnAndEmmitUserMess(userMessage);
+        returnUserMess(userMessage);
+        socket.emit("99", 99);
     }
     else{
         appenduserMessage(userMessage);
         appendbotMessage(invalidResponse);
+        appendbotMessage(options);
         return inputField.value = "";
         
     }
+});
 
-    socket.emit("userMessage", userMessage);
+socket.on("empty order", (message)=>{
+    appendbotMessage(message);
+    
 })
 
 

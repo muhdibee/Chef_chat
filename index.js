@@ -12,30 +12,66 @@ const io = new Server(server);
 
 app.use(express.static("public"));
 
-// Commented the below code because express.static("public") is serving the index.html file.
-// app.get('/', (req,res) => {
-//     res.sendFile("public/index-script.js")
+/* Commented the below code because express.static("public") is serving the index.html file.
+app.get('/', (req,res) => {
+    res.sendFile("public/index-script.js")
 
-// });
+}); 
+*/
+
+// Global variables.
+const BotHelloMessage = `
+    <b>Hello Dear,
+`
+const options = `
+    Select <b>1</b> to Place an order.</br>
+    Select <b>97</b> to see current order.</br>
+    Select <b>98</b> to see order history.</br>
+    Select <b>99</b> to checkout order.</br>
+    Select <b>0</b> to cancel order.
+`
+// const emptyOrder = "You do not have any oder to cancle."
+
+const menu = {
+    1: "Pizza",
+    2: "Shawarma",
+    3: "Rice and Chicken",
+    4: "Meat Pie",
+    5: "Fish Pepper Soup"
+}
+
+const order = [];
 
 io.on("connection", async (socket)=>{
-    console.log(`client connected`);
-    const initailBotMessage = `
-        <b>Hello There,</b> </br> </br>
-        Select <b>1</b> to Place an order</br>
-        Select <b>99</b> to checkout order</br>
-        Select <b>98</b> to see order history</br>
-        Select <b>97</b> to see current order</br>
-        Select <b>0</b> to cancel order
-    `
-
-    socket.emit("connected", initailBotMessage);
-
+    console.log(`client connected.`);
+    
+    socket.emit("connected", BotHelloMessage);
+    socket.emit("connected", options);
 
     socket.on("disconnect", async ()=>{
         console.log("client disconnected.")
-    })
+    });
+
+    // Bot reply for cancel order.
+    socket.on("0", async() =>{
+        if(order.length == 0){
+            socket.emit("empty order", "You do not have any oder to cancle.");
+            socket.emit("empty order", options);
+
+        }
+    });
+
+    // Bot reply for checkout order.
+    socket.on("99", async() =>{
+        if(order.length == 0){
+            socket.emit("empty order", "You have not placed any order yet.");
+            socket.emit("empty order", options);
+
+        }
+    });
+
 });
+
 
 server.listen(port, ()=> {
 console.log(`Running on port ${port}`);
