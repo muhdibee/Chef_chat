@@ -21,13 +21,14 @@ app.use(express.static("public"));
 io.on("connection", async (socket)=>{
     console.log(`client connected`);
     const initailBotMessage = `
-    Hello There, \n
-    Select 1 to Place an order\n
-    Select 99 to checkout order\n
-    Select 98 to see order history\n
-    Select 97 to see current order\n
-    Select 0 to cancel order
+        <b>Hello There,</b> </br> </br>
+        Select <b>1</b> to Place an order</br>
+        Select <b>99</b> to checkout order</br>
+        Select <b>98</b> to see order history</br>
+        Select <b>97</b> to see current order</br>
+        Select <b>0</b> to cancel order
     `
+
     socket.emit("connected", initailBotMessage);
 
 
