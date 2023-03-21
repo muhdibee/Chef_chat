@@ -34,9 +34,10 @@ body {
     position: relative;
     padding: 1%;
     margin-top: 5%;
-    min-height: 88%;
+    height: 88%;
     max-height: 88%;
     background-color: aliceblue;
+    overflow-y: scroll;
 
 }
 .botParag{
