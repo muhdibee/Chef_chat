@@ -39,49 +39,61 @@ let userDivCSS = `
 `
 
 // Global variables.
-let invalidResponse = `
-    <b>Ops, Invalid response.</b>
-    `
-    let options = `
+let div = document.createElement("div");
+let p = document.createElement("p");
+
+let invalidResponse =   `<b>Ops, Invalid response.</b>`
+    let options = `<div>
     Select <b>1</b> to Place an order.</br>
     Select <b>99</b> to checkout order.</br>
     Select <b>98</b> to see order history.</br>
     Select <b>97</b> to see current order.</br>
-    Select <b>0</b> to cancel order.
+    Select <b>0</b> to cancel order.</div>
 `
     // Append bot message to chat.
-    const appendbotMessage = (message) => {
+    const appendStringBotMessage = (message) => {
         let chatSpace = document.getElementById("chatSpace");
         let botDiv = document.createElement("div");
-        botDiv.innerHTML = `<p>${message}</P>`
+        botDiv.innerHTML =  message;
         botDiv.style.cssText = botDivgCSS
         chatSpace.append(botDiv);
+        console.log(botDiv);
         chatSpace.scrollTop = chatSpace.scrollHeight;
   }
+    // Append bot message to chat.
+    const appendElementBotMessage = (message) => {
+    let chatSpace = document.getElementById("chatSpace");
+    let botDiv = document.createElement("div");
+    botDiv.append(message);
+    botDiv.style.cssText = botDivgCSS
+    chatSpace.append(botDiv);
+    console.log(botDiv);
+    chatSpace.scrollTop = chatSpace.scrollHeight;
+}
+
 
     // Append user message to chat.
     const appenduserMessage = (message) => {
         let chatSpace = document.getElementById("chatSpace");
         let userDiv = document.createElement("div");
-        userDiv.innerHTML = `<p>${message}</P>`
+        userDiv.innerHTML = `<div>${message}</div>`
         userDiv.style.cssText = userDivCSS
         chatSpace.append(userDiv);
         chatSpace.scrollTop = chatSpace.scrollHeight;
   }
 
+// On bothello Message.
+socket.on("botHello", async (botHello)=>{
+    console.log(botHello);
+    appendStringBotMessage(botHello);
+});
 
-
-// userParag.style.cssText = userParagCSS;
-
-
-// On initial connection to server.
-socket.on("connected", async (initailBotMessage)=>{
-    console.log("Connected to server.");
-    console.log(initailBotMessage);
-    
-    appendbotMessage(initailBotMessage);
-    
+// On bothello Message.
+socket.on("menuOptions", async (menuOptions)=>{
+    console.log(menuOptions);
+    appendStringBotMessage(menuOptions);
 })
+
 
 
 // Handling form submission on user first reply.
@@ -119,16 +131,35 @@ chatbotForm.addEventListener("submit", (e)=>{
     }
     else{
         appenduserMessage(userMessage);
-        appendbotMessage(invalidResponse);
-        appendbotMessage(options);
+        appendStringBotMessage(invalidResponse);
+        appendStringBotMessage(options);
         return inputField.value = "";
         
     }
 });
 
 socket.on("empty order", (message)=>{
-    appendbotMessage(message);
+    appendStringBotMessage(message);
     
+});
+
+socket.on("menu", (menu)=>{
+    const div = document.createElement("div");
+    const ul = document.createElement("ul");
+    const p = document.createElement("p");
+
+    p.innerHTML = `<b>Please select: </b>`;
+    for(const id in menu){
+        const li = document.createElement("li");   
+        li.innerText = `${id} for ${menu[id]}`;
+        ul.append(li);
+    }
+    div.append(p)
+    div.append(ul);
+
+    appendElementBotMessage(div);
+
 })
+
 
 

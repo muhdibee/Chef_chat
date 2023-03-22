@@ -15,7 +15,7 @@ body {
 #chatBox{
     position: relative;
     height: 70vh;
-    width: 50vw;
+    width: 60vw;
     border: 1px ridge;
     margin: 1px auto;
     border-radius: 5px;

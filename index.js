@@ -20,15 +20,16 @@ app.get('/', (req,res) => {
 */
 
 // Global variables.
-const BotHelloMessage = `
-    <b>Hello Dear,
+
+let BotHelloMessage = `<b>
+    Hello Dear,</b>
 `
-const options = `
+let options = `<div>
     Select <b>1</b> to Place an order.</br>
     Select <b>97</b> to see current order.</br>
     Select <b>98</b> to see order history.</br>
     Select <b>99</b> to checkout order.</br>
-    Select <b>0</b> to cancel order.
+    Select <b>0</b> to cancel order.</div>
 `
 
 const menu = {
@@ -46,28 +47,26 @@ io.on("connection", async (socket)=>{
     
     // Handle bot reply for empty order.
     function emptyOrderRespnse(type){
-        socket.emit("empty order", `You do not have ${type==97 && "any order yet..." 
+        socket.emit("empty order", `<p>You do not have ${type==97 && "any order yet..." 
         || type==98 && "order history..." 
         || type==99&& "any order to checkout..." 
-        || type==0 && "any order to cancle..."}`
+        || type==0 && "any order to cancle..."}<p/>`
         );
         socket.emit("empty order", options);
         return
     } 
     
-    socket.emit("connected", BotHelloMessage);
-    socket.emit("connected", options);
+    socket.emit("botHello", BotHelloMessage);
+    socket.emit("menuOptions", options);
 
     socket.on("disconnect", async ()=>{
         console.log("client disconnected.")
     });
 
     // Bot reply for placing order.
-    // socket.on("1", async() =>{
-    //     if(order.length == 0){
-    //         emptyOrderRespnse(1)
-    //     }
-    // });
+    socket.on("1", async() =>{
+        socket.emit("menu", menu);
+    });
 
     // Bot reply for current order.
     socket.on("97", async() =>{
@@ -165,7 +164,10 @@ console.log(`Running on port ${port}`);
 //         // Save the user's name and update the welcome message
 //         state.userName = message;
 //         await botMessage(
-//           `Welcome to the ChatBot, ${state.userName}! Place an order\n1. Typehere\n99. Typehere\n98. Typehere\n97. Typehere\n0. Cancel order`
+//           `Welcome to the ChatBot, ${state.userName}! Place an order\n
+//1. Typehere\n9
+//9. Typehere\n
+//98. Typehere\n97. Typehere\n0. Cancel order`
 //         );
 //       } else {
 //         switch (message) {
