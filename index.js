@@ -5,7 +5,7 @@ const app = express();
 const http = require("http");
 
 const server = http.createServer(app);
-const port = 8000;
+const port = 8080;
 
 const { Server } = require("socket.io");
 const io = new Server(server);
@@ -47,10 +47,10 @@ io.on("connection", async (socket)=>{
     
     // Handle bot reply for empty order.
     function emptyOrderRespnse(type){
-        socket.emit("empty order", `<p>You do not have ${type==97 && "any order yet..." 
-        || type==98 && "order history..." 
-        || type==99&& "any order to checkout..." 
-        || type==0 && "any order to cancle..."}<p/>`
+        socket.emit("empty order", `<p><b>You do not have ${type==97 && "any order yet." 
+        || type==98 && "order history." 
+        || type==99&& "any order to checkout." 
+        || type==0 && "any order to cancle."}</b><p/>`
         );
         socket.emit("empty order", options);
         return
@@ -100,7 +100,7 @@ io.on("connection", async (socket)=>{
 
 
 server.listen(port, ()=> {
-console.log(`Running on port ${port}`);
+console.log(`Server Running...`);
 });
 
 // const express = require("express");
