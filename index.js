@@ -1,11 +1,12 @@
 // import {log} from './log.js';
+require("dotenv").config();
 const path = require("path")
 const express = require("express");
 const app = express();
 const http = require("http");
 
 const server = http.createServer(app);
-const port = 8080;
+const port = process.env.PORT;
 
 const { Server } = require("socket.io");
 const io = new Server(server);
@@ -100,7 +101,7 @@ io.on("connection", async (socket)=>{
 
 
 server.listen(port, ()=> {
-console.log(`Server Running...`);
+console.log(`Server Running on port ${port}...`);
 });
 
 // const express = require("express");
